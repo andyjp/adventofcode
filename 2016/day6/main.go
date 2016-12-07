@@ -54,15 +54,9 @@ func main() {
 	}
 
 	fmt.Println("Part 1 message:", string(message))
-	getMessageLowestCount(colChars)
-}
 
-func getMessageLowestCount(c map[int]map[string]int) {
-
-	// initialize message
-	message := make([]byte, 8)
-
-	for column, letters := range c {
+	// loop through to get lowest count for part 2 message
+	for column, letters := range colChars {
 
 		var lowest string
 
