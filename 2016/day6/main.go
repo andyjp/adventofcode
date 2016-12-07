@@ -25,10 +25,12 @@ func main() {
 	line := bufio.NewScanner(f)
 	for line.Scan() {
 
+		// initialize column number
+		var col int
+
 		// loop through each character on each line
 		characters := bufio.NewScanner(strings.NewReader(line.Text()))
 		characters.Split(bufio.ScanRunes)
-		col := 0
 		for characters.Scan() {
 
 			letter := characters.Text()
@@ -38,13 +40,8 @@ func main() {
 				colChars[col] = make(map[string]int)
 			}
 
-			// if letter isn't in letters map create it and initialize count
-			if colChars[col][letter] == 0 {
-				colChars[col][letter] = 1
-			} else {
-				// increment count if it exists
-				colChars[col][letter]++
-			}
+			// increment letter count
+			colChars[col][letter]++
 
 			// add to message if letter has highest count
 			if colChars[col][letter] > colChars[col][string(message[col])] {
@@ -84,5 +81,4 @@ func getMessageLowestCount(c map[int]map[string]int) {
 	}
 
 	fmt.Println("Part 2 message:", string(message))
-
 }
