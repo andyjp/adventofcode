@@ -1,19 +1,17 @@
-const https = require('https')
-const cookie = require('./cookie')
+import * as https from 'https'
+import { session } from './cookie.mjs'
 
-const getInput = (day) => {
+export const getInput = (day) => {
     return new Promise((resolve) => {
         let data = ''
         const options = {
             headers: {
-                cookie: `session=${cookie.session}`
+                cookie: `session=${session}`
             }
         }
-        https.get(`https://adventofcode.com/2022/day/${day}/input`, options, res => {
+        https.get(`https://adventofcode.com/2023/day/${day}/input`, options, res => {
             res.on('data', chunk => { data += chunk })
             res.on('end', () => { resolve(data.trim()); })
         })
     })
 }
-
-module.exports = { getInput }
